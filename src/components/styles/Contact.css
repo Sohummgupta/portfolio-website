@@ -10,9 +10,11 @@
   margin: 0;
 }
 .contact-flex {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  padding-right: 80px;
+  margin-left: -80px;
+  padding-right: 120px;
+  position: relative;
 }
 .contact-flex h4 {
   font-weight: 500;
@@ -20,8 +22,12 @@
   opacity: 0.6;
 }
 .contact-box {
+  padding: 80px;
   display: flex;
   flex-direction: column;
+  width: 700px;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 .contact-flex p {
   margin-top: 10px;
@@ -57,8 +63,15 @@ a.contact-social {
   a.contact-social {
     font-size: 22px;
   }
+}
+@media only screen and (max-width: 1400px) {
+  .contact-box {
+    width: 350px;
+    padding: 30px;
+  }
   .contact-flex {
-    padding-right: 60px;
+    margin-left: -30px;
+    padding-right: 45px;
   }
 }
 @media only screen and (max-width: 1300px) {
@@ -71,9 +84,6 @@ a.contact-social {
   a.contact-social {
     font-size: 20px;
   }
-  .contact-flex {
-    padding-right: 40px;
-  }
   .contact-flex p {
     margin-top: 0px;
   }
@@ -83,6 +93,11 @@ a.contact-social {
     flex-direction: column;
     gap: 40px;
     padding-right: 0;
+    margin-left: 0;
+  }
+  .contact-box {
+    width: 100%;
+    padding: 0;
   }
   .contact-flex p {
     margin-bottom: 0px;
