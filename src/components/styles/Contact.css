@@ -11,8 +11,8 @@
 }
 .contact-flex {
   display: flex;
-  justify-content: flex-start;
-  gap: 200px;
+  justify-content: space-between;
+  padding-right: 150px;
 }
 .contact-flex h4 {
   font-weight: 500;
@@ -76,6 +76,7 @@ a.contact-social {
   .contact-flex {
     flex-direction: column;
     gap: 40px;
+    padding-right: 0;
   }
   .contact-flex p {
     margin-bottom: 0px;
