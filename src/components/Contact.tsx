@@ -5,9 +5,9 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <h3>Contact</h3>
         <div className="contact-flex">
           <div className="contact-box">
+            <h3>Contact</h3>
             <h4>Email</h4>
             <p>
               <a href="mailto:sohummgupta@gmail.com" data-cursor="disable">
@@ -22,7 +22,7 @@ const Contact = () => {
             </p>
           </div>
           <div className="contact-box">
-            <h4>Social</h4>
+            <h3>Social</h3>
             <a
               href="https://github.com/Sohummgupta"
               target="_blank"
