@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
-const setLighting = (scene: THREE.Scene) => {
+const setLighting = (scene: THREE.Scene, renderer: THREE.WebGLRenderer, camera: THREE.PerspectiveCamera) => {
   const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 0);
   directionalLight.intensity = 0;
   directionalLight.position.set(-0.47, -0.32, -1);
@@ -25,6 +25,7 @@ const setLighting = (scene: THREE.Scene) => {
       scene.environment = texture;
       scene.environmentIntensity = 0;
       scene.environmentRotation.set(5.76, 85.85, 1);
+      renderer.compile(scene, camera);
     });
 
   function setPointLight(screenLight: any) {

@@ -49,7 +49,7 @@ const Scene = () => {
 
       const clock = new THREE.Clock();
 
-      const light = setLighting(scene);
+      const light = setLighting(scene, renderer, camera);
       let progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
@@ -63,6 +63,10 @@ const Scene = () => {
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
           screenLight = character.getObjectByName("screenlight") || null;
+          
+          // Pre-compile shaders to prevent the scene from hanging when it's first displayed
+          renderer.compile(scene, camera);
+
           progress.loaded().then(() => {
             setTimeout(() => {
               light.turnOnLights();

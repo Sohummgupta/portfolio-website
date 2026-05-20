@@ -197,6 +197,13 @@
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+}
+.navbar-logo {
+  max-height: 50px;
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(350deg) brightness(1.2);
+  margin-top: -10px;
 }
 @keyframes blink {
   0% {

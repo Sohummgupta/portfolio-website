@@ -24,9 +24,10 @@
 }
 
 .about-me p {
-  font-size: 33px;
-  font-weight: 600;
-  line-height: 36px;
+  font-family: 'Georgia', serif;
+  font-size: 24px;
+  font-weight: 400; /* Lighter weight for serif */
+  line-height: 28px;
   letter-spacing: 1px;
 }
 
@@ -59,13 +60,13 @@
     width: 50%;
   }
   .about-me p {
-    font-size: 1.9vw;
-    line-height: 2.3vw;
+    font-size: 1.5vw;
+    line-height: 1.8vw;
   }
 }
 @media only screen and (min-width: 1950px) {
   .about-me p {
-    font-size: 2.5rem;
-    line-height: 2.7rem;
+    font-size: 2rem;
+    line-height: 2.2rem;
   }
 }
