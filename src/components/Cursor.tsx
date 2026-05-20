@@ -5,6 +5,7 @@ import gsap from "gsap";
 const Cursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    if (window.innerWidth <= 1024) return;
     let hover = false;
     const cursor = cursorRef.current!;
     const mousePos = { x: 0, y: 0 };
