@@ -5,9 +5,10 @@
 }
 .contact-section h3 {
   font-size: 60px;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
   margin: 0 0 30px 0;
+  color: var(--accentColor);
 }
 .contact-flex {
   display: flex;
@@ -25,11 +26,24 @@
 }
 .contact-flex p {
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: #f0e6d2;
 }
 a.contact-social {
-  font-size: 25px;
-  border-bottom: 1px solid #ccc;
+  font-size: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  color: #c0c0c0;
+}
+a.contact-social:hover {
+  border-bottom-color: var(--accentColor);
+  color: var(--accentColor);
+  padding-left: 10px;
 }
 .contact-box h2 {
   font-weight: 400;
@@ -54,9 +68,6 @@ a.contact-social {
   .contact-box h2 {
     font-size: 20px;
   }
-  a.contact-social {
-    font-size: 22px;
-  }
 }
 @media only screen and (max-width: 1300px) {
   .contact-section h3 {
@@ -66,7 +77,7 @@ a.contact-social {
     font-size: 18px;
   }
   a.contact-social {
-    font-size: 20px;
+    font-size: 18px;
   }
   .contact-flex p {
     margin-top: 0px;

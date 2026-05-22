@@ -1,92 +1,38 @@
-import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedinIn,
-  FaXTwitter,
-} from "react-icons/fa6";
-import "./styles/SocialIcons.css";
+import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { TbNotes } from "react-icons/tb";
-import { useEffect } from "react";
-import HoverLinks from "./HoverLinks";
 
 const SocialIcons = () => {
-  useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
-
-    social.querySelectorAll("span").forEach((item) => {
-      const elem = item as HTMLElement;
-      const link = elem.querySelector("a") as HTMLElement;
-
-      const rect = elem.getBoundingClientRect();
-      let mouseX = rect.width / 2;
-      let mouseY = rect.height / 2;
-      let currentX = 0;
-      let currentY = 0;
-
-      const updatePosition = () => {
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
-
-        link.style.setProperty("--siLeft", `${currentX}px`);
-        link.style.setProperty("--siTop", `${currentY}px`);
-
-        requestAnimationFrame(updatePosition);
-      };
-
-      const onMouseMove = (e: MouseEvent) => {
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (x < 40 && x > 10 && y < 40 && y > 5) {
-          mouseX = x;
-          mouseY = y;
-        } else {
-          mouseX = rect.width / 2;
-          mouseY = rect.height / 2;
-        }
-      };
-
-      document.addEventListener("mousemove", onMouseMove);
-
-      updatePosition();
-
-      return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
-      };
-    });
-  }, []);
-
   return (
-    <div className="icons-section">
-      <div className="social-icons" data-cursor="icons" id="social">
-        <span>
-          <a href="https://github.com/Sohummgupta" target="_blank">
-            <FaGithub />
-          </a>
-        </span>
-        <span>
-          <a href="https://linkedin.com/in/sohum-gupta" target="_blank">
-            <FaLinkedinIn />
-          </a>
-        </span>
-        <span>
-          <a href="https://x.com/SohummGupta" target="_blank">
-            <FaXTwitter />
-          </a>
-        </span>
-        <span>
-          <a href="https://www.instagram.com/sohummgupta/" target="_blank">
-            <FaInstagram />
-          </a>
-        </span>
+    <>
+      {/* Social Media - Left Center Fixed */}
+      <div className="fixed left-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-50 mix-blend-difference hidden lg:flex">
+        <a href="https://github.com/Sohummgupta" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
+          <FaGithub className="w-5 h-5" />
+        </a>
+        <a href="https://linkedin.com/in/sohum-gupta" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
+          <FaLinkedinIn className="w-5 h-5" />
+        </a>
+        <a href="https://x.com/SohummGupta" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
+          <FaXTwitter className="w-5 h-5" />
+        </a>
+        <a href="https://www.instagram.com/sohummgupta/" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
+          <FaInstagram className="w-5 h-5" />
+        </a>
       </div>
-      <a className="resume-button" href="/Resume.pdf" target="_blank">
-      <HoverLinks text="RESUME" />
-        <span>
-          <TbNotes />
-        </span>
+
+      {/* Resume - Right Side Fixed */}
+      <a 
+        href="/Resume.pdf" 
+        target="_blank" 
+        className="fixed right-6 bottom-10 z-50 flex items-center gap-2 group hidden lg:flex mix-blend-difference"
+      >
+        <span className="text-white/50 group-hover:text-white text-xs tracking-widest font-medium uppercase transition-colors">Resume</span>
+        <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover:text-white group-hover:bg-white/10 transition-all duration-300">
+          <TbNotes className="w-5 h-5" />
+        </div>
       </a>
-    </div>
+    </>
   );
 };
 

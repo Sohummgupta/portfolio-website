@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
-
 import Marquee from "react-fast-marquee";
 
 const Loading = ({ percent }: { percent: number }) => {
@@ -10,28 +9,41 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
+  if (percent >= 100 && !loaded) {
+    setLoaded(true);
     setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
+      setIsLoaded(true);
+    }, 600); // Changes text to "Welcome"
   }
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
+    if (isLoaded && !clicked) {
+      setTimeout(() => {
+        setClicked(true); // Triggers massive expansion
+      }, 1000); 
+    }
+  }, [isLoaded, clicked]);
+
+  useEffect(() => {
+    if (clicked) {
+      import("./utils/initialFX").then((module) => {
         setTimeout(() => {
           if (module.initialFX) {
             module.initialFX();
           }
-          setIsLoading(false);
-        }, 900);
-      }
-    });
-  }, [isLoaded]);
+          
+          const loadingScreen = document.querySelector('.loading-screen') as HTMLElement;
+          if (loadingScreen) {
+             loadingScreen.style.transition = "opacity 0.8s ease";
+             loadingScreen.style.opacity = "0";
+             setTimeout(() => setIsLoading(false), 800);
+          } else {
+             setIsLoading(false);
+          }
+        }, 1000); // 1s expansion animation
+      });
+    }
+  }, [clicked, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
@@ -43,38 +55,36 @@ const Loading = ({ percent }: { percent: number }) => {
   }
 
   return (
-    <>
-      <div className="loading-header">
-        <a href="/#" className="loader-title" data-cursor="disable">
-        </a>
+    <div className={`loading-screen`}>
+      {/* Premium Marquee Background */}
+      <div className="loading-marquee">
+        <Marquee speed={40} gradient={false}>
+          <span> An Aspiring Software Developer </span> 
+          <span> An Aspiring Software Developer </span>
+          <span> An Aspiring Software Developer </span> 
+          <span> An Aspiring Software Developer </span>
+        </Marquee>
       </div>
-      <div className="loading-screen">
-        <div className="loading-marquee">
-          <Marquee>
-            <span> An Aspiring Software Developer</span> <span> An Aspiring Software Developer</span>
-            <span> An Aspiring Software Developer</span> <span> An Aspiring Software Developer</span>
-          </Marquee>
-        </div>
-        <div
-          className={`loading-wrap ${clicked && "loading-clicked"}`}
-          onMouseMove={(e) => handleMouseMove(e)}
-        >
-          <div className="loading-hover"></div>
-          <div className={`loading-button ${loaded && "loading-complete"}`}>
-            <div className="loading-container">
-              <div className="loading-content">
-                <div className="loading-content-in">
-                  Loading <span>{percent}%</span>
-                </div>
-              </div>
+
+      {/* Interactive Pill */}
+      <div
+        className={`loading-wrap ${clicked ? "loading-clicked" : ""}`}
+        onMouseMove={handleMouseMove}
+      >
+        <div className="loading-hover"></div>
+        
+        <div className={`loading-button ${isLoaded ? "loading-complete" : ""}`}>
+          <div className="loading-content">
+            <div className="loading-content-in">
+              Loading <span className="mono-percent">{percent < 100 ? percent.toString().padStart(2, '0') : percent}%</span>
             </div>
-            <div className="loading-content2">
-              <span>Welcome</span>
-            </div>
+          </div>
+          <div className="loading-content2">
+            <span>Welcome</span>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -85,7 +95,7 @@ export const setProgress = (setLoading: (value: number) => void) => {
 
   let interval = setInterval(() => {
     if (percent <= 50) {
-      let rand = Math.round(Math.random() * 5);
+      const rand = Math.round(Math.random() * 5);
       percent = percent + rand;
       setLoading(percent);
     } else {

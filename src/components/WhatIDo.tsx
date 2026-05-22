@@ -33,8 +33,8 @@ const WhatIDo = () => {
   return (
     <div className="whatIDO" id="skills">
       <div className="what-box">
-        <h2 className="title">
-          S<span className="hat-h2">KILLS</span>
+        <h2 className="title hat-h2" style={{ color: "#ffffff", letterSpacing: "2px", whiteSpace: "nowrap" }}>
+          SKILLS
         </h2>
       </div>
       <div className="what-box skills-box">

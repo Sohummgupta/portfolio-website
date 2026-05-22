@@ -1,4 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
+import { ReactLenis } from "lenis/react";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
@@ -27,24 +28,22 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   }, [isDesktopView]);
 
   return (
-    <div className="container-main">
+    <main className="container-main">
       <Cursor />
       <Navbar />
       <SocialIcons />
       {isDesktopView && children}
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-          <div className="container-main">
-            <Landing></Landing>
-            <About />
-            <WhatIDo />
-            <Career />
-            <Work />
-            <Contact />
-          </div>
+      <ReactLenis root>
+        <div className="min-h-screen">
+          <Landing />
+          <About />
+          <WhatIDo />
+          <Career />
+          <Work />
+          <Contact />
         </div>
-      </div>
-    </div>
+      </ReactLenis>
+    </main>
   );
 };
 
