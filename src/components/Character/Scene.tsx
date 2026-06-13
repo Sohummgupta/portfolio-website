@@ -167,7 +167,7 @@ const Scene = () => {
   return (
     <>
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="character-model absolute left-0 right-0 mx-auto bottom-0 w-full max-w-[1920px] h-[80vh] md:h-screen pointer-events-auto flex items-end justify-center" ref={canvasDiv} style={{ '& canvas': { pointerEvents: 'none', position: 'relative', zIndex: 2 } } as any}>
+        <div className="character-model absolute left-0 right-0 mx-auto bottom-0 w-full max-w-[1920px] h-[55vh] md:h-screen pointer-events-auto flex items-end justify-center" ref={canvasDiv} style={{ '& canvas': { pointerEvents: 'none', position: 'relative', zIndex: 2 } } as any}>
           <div className="character-rim opacity-0 mix-blend-screen transition-opacity duration-[3s] delay-300"></div>
           <div className="character-hover absolute w-[280px] h-[280px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 rounded-full" ref={hoverDivRef}></div>
         </div>

@@ -32,7 +32,7 @@ const Landing = () => {
         </motion.div>
 
         {/* Center: Blank Space for 3D Character */}
-        <div className="w-full h-full pointer-events-none relative flex justify-center items-center">
+        <div className="w-full h-full pointer-events-none relative justify-center items-center hidden md:flex">
           
           {/* Subtle particles or ambient floating elements */}
           <motion.div 
@@ -52,7 +52,7 @@ const Landing = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="flex flex-col justify-center items-end text-right space-y-8"
+          className="flex flex-col justify-start md:justify-center items-center md:items-end text-center md:text-right space-y-8 pt-10 md:pt-0 w-full"
         >
           <h1 className="text-white text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[0.9] tracking-tight mb-4">
             I'm <br />
