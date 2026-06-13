@@ -10,19 +10,11 @@ import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
-import { useLoading } from "../context/LoadingProvider";
 
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
     window.innerWidth > 1024
   );
-  const { setLoading } = useLoading();
-
-  useEffect(() => {
-    if (window.innerWidth <= 1024) {
-      setLoading(100);
-    }
-  }, [setLoading]);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -41,7 +33,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Cursor />
       <Navbar />
       <SocialIcons />
-      {isDesktopView && children}
+      {children}
       <ReactLenis root>
         <div className="min-h-screen">
           <Landing />
