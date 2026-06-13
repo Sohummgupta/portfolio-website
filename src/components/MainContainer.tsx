@@ -10,10 +10,20 @@ import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
+import { useLoading } from "../context/LoadingProvider";
+import { setProgress } from "./Loading";
+
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
     window.innerWidth > 1024
   );
+  const { setLoading } = useLoading();
+
+  useEffect(() => {
+    if (window.innerWidth <= 1024) {
+      setLoading(100);
+    }
+  }, [setLoading]);
 
   useEffect(() => {
     const resizeHandler = () => {

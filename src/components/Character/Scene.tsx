@@ -27,16 +27,23 @@ const Scene = () => {
       const aspect = container.width / container.height;
       const scene = sceneRef.current;
 
-      const renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: window.devicePixelRatio <= 1, // Fixes lag on retina displays
-        powerPreference: "high-performance",
-      });
-      renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1;
-      canvasDiv.current.appendChild(renderer.domElement);
+      let renderer: THREE.WebGLRenderer;
+      try {
+        renderer = new THREE.WebGLRenderer({
+          alpha: true,
+          antialias: window.devicePixelRatio <= 1, // Fixes lag on retina displays
+          powerPreference: "high-performance",
+        });
+        renderer.setSize(container.width, container.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1;
+        canvasDiv.current.appendChild(renderer.domElement);
+      } catch (err) {
+        console.error("WebGL failed to initialize:", err);
+        setLoading(100);
+        return;
+      }
 
       const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
       camera.position.z = 10;
@@ -54,33 +61,38 @@ const Scene = () => {
       const progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
-      loadCharacter().then((gltf) => {
-        if (gltf) {
-          const animations = setAnimations(gltf);
-          if (hoverDivRef.current) {
-            animations.hover(gltf, hoverDivRef.current);
-          }
-          mixer = animations.mixer;
-          const character = gltf.scene;
-          setChar(character);
-          scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
-          screenLight = character.getObjectByName("screenlight") || null;
-          
-          // Pre-compile shaders to prevent the scene from hanging when it's first displayed
-          renderer.compile(scene, camera);
+      loadCharacter()
+        .then((gltf) => {
+          if (gltf) {
+            const animations = setAnimations(gltf);
+            if (hoverDivRef.current) {
+              animations.hover(gltf, hoverDivRef.current);
+            }
+            mixer = animations.mixer;
+            const character = gltf.scene;
+            setChar(character);
+            scene.add(character);
+            headBone = character.getObjectByName("spine006") || null;
+            screenLight = character.getObjectByName("screenlight") || null;
+            
+            // Pre-compile shaders to prevent the scene from hanging when it's first displayed
+            renderer.compile(scene, camera);
 
-          progress.loaded().then(() => {
-            setTimeout(() => {
-              light.turnOnLights();
-              animations.startIntro();
-            }, 500);
-          });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
-        }
-      });
+            progress.loaded().then(() => {
+              setTimeout(() => {
+                light.turnOnLights();
+                animations.startIntro();
+              }, 500);
+            });
+            window.addEventListener("resize", () =>
+              handleResize(renderer, camera, canvasDiv, character)
+            );
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to load character:", err);
+          setLoading(100);
+        });
 
       let mouse = { x: 0, y: 0 },
         interpolation = { x: 0.1, y: 0.2 };
@@ -155,7 +167,7 @@ const Scene = () => {
   return (
     <>
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="character-model absolute left-1/2 bottom-0 w-full max-w-[1920px] h-[80vh] md:h-screen -translate-x-1/2 pointer-events-auto flex items-end justify-center" ref={canvasDiv} style={{ '& canvas': { pointerEvents: 'none', position: 'relative', zIndex: 2 } } as any}>
+        <div className="character-model absolute left-0 right-0 mx-auto bottom-0 w-full max-w-[1920px] h-[80vh] md:h-screen pointer-events-auto flex items-end justify-center" ref={canvasDiv} style={{ '& canvas': { pointerEvents: 'none', position: 'relative', zIndex: 2 } } as any}>
           <div className="character-rim opacity-0 mix-blend-screen transition-opacity duration-[3s] delay-300"></div>
           <div className="character-hover absolute w-[280px] h-[280px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 rounded-full" ref={hoverDivRef}></div>
         </div>
