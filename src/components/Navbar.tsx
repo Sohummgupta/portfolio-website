@@ -49,7 +49,7 @@ const Navbar = () => {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-6 transition-all duration-500 ${scrolled ? 'pt-4' : 'pt-6'}`}
     >
-      <nav className="relative flex items-center justify-between w-full max-w-6xl px-6 py-3 mx-auto glass rounded-full shadow-2xl shadow-black/20">
+      <nav className="relative flex items-center justify-center md:justify-between w-fit md:w-full max-w-6xl px-4 md:px-6 py-2 md:py-3 mx-auto glass rounded-full shadow-2xl shadow-black/20">
         
         {/* Logo Area */}
         <a href="#" onClick={(e) => handleClick(e, "#")} className="flex items-center group">

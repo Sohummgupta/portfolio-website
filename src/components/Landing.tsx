@@ -12,7 +12,7 @@ const Landing = () => {
         <div className="w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.15)_0%,_rgba(7,7,7,0)_60%)] transform-gpu"></div>
       </div>
 
-      <div className="landing-container relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 items-center h-full pt-20 pb-10">
+      <div className="landing-container relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 items-center h-full pt-10 md:pt-20 pb-10">
         
         {/* Left Side: Clean Intro */}
         <motion.div 
@@ -52,9 +52,9 @@ const Landing = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="flex flex-col justify-start md:justify-center items-center md:items-end text-center md:text-right space-y-8 pt-10 md:pt-0 w-full"
+          className="flex flex-col justify-start md:justify-center items-center md:items-end text-center md:text-right space-y-6 md:space-y-8 pt-0 w-full"
         >
-          <h1 className="text-white text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[0.9] tracking-tight mb-4">
+          <h1 className="text-white text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[0.9] tracking-tight mb-2 md:mb-4">
             I'm <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fce2a1] to-[#d4af37]">Sohum Gupta</span>
           </h1>
