@@ -35,22 +35,9 @@ const Work = () => {
     let translateX: number = 0;
 
     function setTranslateX() {
-      const box = document.getElementsByClassName("work-box");
-      const container = document.querySelector(".work-container");
-      
-      if (!box.length || !container) return;
-
-      const rectLeft = container.getBoundingClientRect().left;
-      const rect = box[0].getBoundingClientRect();
-      const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-      
-      let padding = 0;
-      const computedPadding = window.getComputedStyle(box[0]).padding;
-      if (computedPadding) {
-         padding = parseInt(computedPadding) / 2 || 0;
-      }
-
-      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
+      const workFlex = document.querySelector(".work-flex");
+      if (!workFlex) return;
+      translateX = Math.max(0, workFlex.scrollWidth - workFlex.clientWidth);
     }
 
     setTranslateX();
@@ -59,10 +46,16 @@ const Work = () => {
       scrollTrigger: {
         trigger: ".work-section",
         start: "top top",
-        end: () => `+=${translateX}`, // Evaluated dynamically
+        end: () => `+=${translateX}`,
         scrub: 1,
         pin: true,
-        invalidateOnRefresh: true, // Crucial for responsive resizing
+        invalidateOnRefresh: true,
+        snap: {
+          snapTo: 1 / (document.querySelectorAll(".work-box").length - 1 || 1),
+          duration: 0.5,
+          delay: 0.1,
+          ease: "power1.inOut"
+        },
         id: "work",
       },
     });
