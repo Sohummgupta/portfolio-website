@@ -10,7 +10,7 @@ const SocialIcons = () => {
         <a href="https://github.com/Sohummgupta" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
           <FaGithub className="w-5 h-5" />
         </a>
-        <a href="https://linkedin.com/in/sohum-gupta" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
+        <a href="https://www.linkedin.com/in/sohum-gupta-68b86b331" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">
           <FaLinkedinIn className="w-5 h-5" />
         </a>
         <a href="https://x.com/SohummGupta" target="_blank" className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300">

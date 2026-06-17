@@ -43,7 +43,7 @@ const Contact = () => {
                 <FaGithub className="w-4 h-4" /> Github <ArrowUpRight className="w-3 h-3 opacity-50" />
               </a>
               <a 
-                href="https://linkedin.com/in/sohum-gupta" 
+                href="https://www.linkedin.com/in/sohum-gupta-68b86b331" 
                 target="_blank" 
                 rel="noreferrer"
                 className="flex items-center gap-2 text-text-secondary hover:text-white transition-colors text-sm font-medium"
