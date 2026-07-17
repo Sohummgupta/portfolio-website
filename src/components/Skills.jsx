@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Code, Layout, Database, Wrench } from 'lucide-react';
 import './Skills.css';
 
@@ -9,8 +9,14 @@ export default function Skills() {
     target: targetRef,
   });
 
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 25,
+    restDelta: 0.001
+  });
+
   // Calculate horizontal translation based on scroll progress
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-65%"]);
+  const x = useTransform(smoothProgress, [0, 1], ["0%", "-65%"]);
 
   const skillCategories = [
     {

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { MapPin, GraduationCap } from 'lucide-react';
 import './Experience.css';
 
@@ -9,9 +9,15 @@ export default function Experience() {
     target: targetRef,
   });
 
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 25,
+    restDelta: 0.001
+  });
+
   // Calculate horizontal translation based on scroll progress
   // -60% will shift the horizontal track to the left as we scroll down
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+  const x = useTransform(smoothProgress, [0, 1], ["0%", "-60%"]);
 
   const experiences = [
     {
