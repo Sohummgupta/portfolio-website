@@ -1,0 +1,82 @@
+/* What I Do Section */
+.wid-text {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 4rem;
+}
+
+.word {
+  opacity: 0.15;
+  display: inline-block;
+  will-change: opacity, color;
+}
+
+.script-text-blue {
+  font-family: var(--font-script);
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: 1.1em;
+  /* Override opacity specifically for the word animation to fade into blue instead of black */
+}
+
+/* About Me Section */
+.about-layout {
+  padding-top: 0;
+}
+
+.polaroid-col {
+  flex: 0 0 400px;
+}
+
+.polaroid-wrapper {
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.polaroid {
+  background: var(--white);
+  padding: 1.5rem 1.5rem 4rem 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+.polaroid-img-placeholder {
+  background: #2a2a2a;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  color: var(--text-grey);
+  margin-top: 3rem;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+}
+
+.signature {
+  font-family: var(--font-script);
+  color: var(--accent-blue);
+  font-size: 4rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 992px) {
+  .polaroid-col {
+    flex: auto;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
